@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>KGKM Bets</title>
+        <title>SBC </title>
 
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -32,11 +32,8 @@
         <div class="relative justify-center" style="justify-content: center; width:50%; margin: 200px auto auto;">
             <div style="text-align: center">
                 <x-auth-session-status class="mb-4" :status="session('status')" />
-                <h3 style="text-align: left">KGKM Bets</h3>
-                <p style="text-align: justify">KGKM Bets to organizacja pełna pasji i miłości do sportu. Założona w roku 2022 przez czworo ambitnych studentów, dzisiaj dostarcza
-                emocji i wrażeń całym rzeszom użytkowników na terenie całej Polski. Skromne początki KGKM sięgają zajęć z zaawansowanego programowania w PHP, jednak
-                nadzwyczajna realizacja tematu wraz z odpowiednim wybadaniem rynku zakładowego szybko doprowadziły do rosnącej popularności serwisu KGKM Bets, a co
-                za tym idzie, sławy i chwały dla jej twórców.</p>
+                <h3 style="text-align: left">SBC</h3>
+                <p style="text-align: justify">XD XD XD XD</p>
                 <section id="us"></section>
             </div>
             <div style="text-align: justify">
@@ -64,11 +61,12 @@
                 <h3 style="text-align: left">Regulamin</h3>
                 <p style="margin-left: 20px;">Udział w grze jest dozwolony jedynie po zaakceptowaniu poniższych zasad:</p>
                 <ol>
-                    <li>Obowiązaują zasady fair play</li>
-                    <li>Gracz musi posiadać ukończone 18 lat</li>
+                    <li>a) "SportBetChallenge" - platforma internetowa dostępna pod adresem [adres strony], świadcząca usługi związane z obstawianiem meczów sportowych.</li>
+                    <li>"Użytkownik" - osoba korzystająca z usług SportBetChallenge poprzez założenie konta i/lub logowanie się na stronie.</li>
+                    <Li>"Liga" - grupa użytkowników tworzona na SportBetChallenge w celu rywalizacji w obstawianiu meczów.</Li>
                     <li>Podmiotem prawnym KGKM Bets jest KGKM</li>
-                    <li>Wszelkie środki wpłacone na konto stają się własnością KGKM</li>
-                    <li>W przypadku podejrzanych działań danego konta KGKM zastrzega sobie prawo do zablokowania go jeżeli wysłane wpierw ostrzeżenia nie przyniosą efektów.</li>
+                    <li>"Punkty" - wirtualna waluta przyznawana użytkownikom w zależności od ich aktywności i wyników w obstawianiu meczów.</li>
+                    <li>"Mecz" - wydarzenie sportowe, na które użytkownicy mogą typować wynik.</li>
                 </ol>
                 <section id="rules"></section>
             </div>
