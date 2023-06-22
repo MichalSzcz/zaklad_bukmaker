@@ -65,8 +65,8 @@
     }
 </style>
 <div id="DisciplineMenu">
-    <a href="{{url('/bets/football')}}">Piłka Nożna</a>
-    <a href="{{url('/bets/volleyball')}}">Siatkówka</a>
+    <a href="{{url('/bets/football')}}">Cycki</a>
+    <a href="{{url('/bets/volleyball')}}">Walenie Konia</a>
     <a href="{{url('/bets/dart')}}">Dart</a>
     <a href="{{url('/bets/handball')}}">Piłka Ręczna</a>
     <a href="{{url('/bets/basketball')}}">Koszykówka</a>
