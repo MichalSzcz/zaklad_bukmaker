@@ -17,7 +17,20 @@
             border-radius: 5px;
             background-color: lightgray;
         }
-        .abutton:hover {
+
+         .jeden {
+             background: linear-gradient(#fde910, #ffc72c);
+             width: 390px;
+
+
+         }
+         .dwa {
+             padding: 10px;
+         }
+
+
+
+    .abutton:hover {
             background-color: gray;
         }
         .bet-button-div {
@@ -62,7 +75,7 @@
         }
     </style>
 </head>
-<body class="antialiased" style="background: whitesmoke">
+<body class="antialiased" style="background: #1a202c">
 @include('partial.header')
 <div class="relative justify-center" style="justify-content: center; width:50%; margin: 200px auto">
 
@@ -70,34 +83,25 @@
         @csrf
         <!-- Statute -->
 
-        <div>
+        <div class="jeden">
             <x-input-label for="email" :value="__('Aby usunąć konto przepisz zdanie: ').$sentence" />
+
             <x-text-input id="delete" type="text" name="sentence"/>
-            <x-input-error :messages="$errors->get('sentence')" class="mt-2" />
+            <x-input-error :messages="$errors->get('sentence')" class="jeden" />
         </div>
-        <x-primary-button class="ml-4">
+
+
+        <x-primary-button class="jeden">
             {{ __('Usuń konto') }}
         </x-primary-button>
 
         <!-- User_deposit -->
-        <div>
+        <div class="dwa">
             <input id="pattern" name="pattern" type="hidden" value="{{$sentence}}">
-            <x-input-error :messages="$errors->get('pattern')" class="mt-2" />
+            <x-input-error :messages="$errors->get('pattern')" class="jeden" />
         </div>
     </form>
-{{--    <form>--}}
-{{--        @if(($user->premium) == true)--}}
-{{--        <label for="sentence">Aby usunąć konto przepisz zdanie: Litwo Ojczyzno Moja, Ty jesteś jak zdrowie, ile Cię trzeba cenić ten tylko się dowie kto Cię stracił"</label>--}}
-{{--        <input type="text" id="sentence" name="sentence">--}}
 
-{{--        <input type="submit" value="Usuń konto">--}}
-{{--        @else--}}
-{{--        <label for="sentence">Aby usunąć konto przepisz zdanie: "Nie płacz kiedy odjadę."</label>--}}
-{{--        <input type="text" id="sentence" name="sentence">--}}
-
-{{--        <input type="submit" value="Usuń konto">--}}
-{{--        @endif--}}
-{{--    </form>--}}
 </div>
 </body>
 </html>

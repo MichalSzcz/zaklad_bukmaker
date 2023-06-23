@@ -15,10 +15,12 @@
         .abutton {
             padding: 10px;
             border-radius: 5px;
-            background-color: beige;
+            background-color: yellow;
+            color: black;
         }
         .abutton:hover {
-            background-color: gray;
+            background: linear-gradient(#fde910, #ffc72c);
+            color: yellow;
         }
         .bet-button-div {
             display: grid;
@@ -28,17 +30,20 @@
         }
         span {
             float: right;
-            color: blue;
+            color: yellow;
         }
+
     </style>
 
     <style>
         body {
             font-family: 'Nunito', sans-serif;
         }
+
         .static {
             border: 1px solid lightgray;
-            background-color: #f0f0f0;
+            background: linear-gradient(#fde910, #ffc72c);
+            color: black;
             padding: 10px;
             border-radius: 10px;
             text-align: center;
@@ -46,9 +51,11 @@
             margin-bottom: 10px;
             height: 60px;
         }
+
         .person {
             border: 1px solid lightgray;
-            background-color: #f4f4f4;
+            background-color: black;
+            color: yellow;
             padding: 10px;
             border-radius: 10px;
             text-align: center;
@@ -56,6 +63,7 @@
             margin-bottom: 20px;
             height: 60px;
         }
+
         .links {
             text-align: left;
             width: 50%;
@@ -73,10 +81,12 @@
         .links a {
             display: block;
             margin-bottom: 10px;
+            color: yellow;
         }
+
     </style>
 </head>
-<body class="antialiased" style="background: whitesmoke">
+<body class="antialiased" style="background: #1a202c">
 @include('partial.header')
 <div class="relative justify-center" style="justify-content: center; width:80%; margin: 200px auto; display:grid; grid-template-columns: 20% 80%">
     <div class = 'links'>
@@ -92,45 +102,45 @@
         <br>
         <br>
 
-            <?php
-            $formsy = ["Imie", "Nazwisko", 'Email', 'Pseudonim', 'Numer telefonu', 'Pesel', 'Data urodzenia',
-                'Płeć', 'Rodzaj Konta'];
-            $pesel = $user->person_number;
-            if ($pesel[0] == 0) {
-                $year = '200' . $pesel[1];
-            } else {
-                $year = '19'. $pesel[0]. $pesel[1];
-            }
-            $month = $pesel[2].$pesel[3];
-            $day = $pesel[4].$pesel[5];
-            $birthdate = $day.'-'.$month.'-'.$year;
-            if (($pesel[7] % 2)== 0) {
-                $sex = 'Kobieta';
-            } else {
-                $sex = 'Mężczyzna';
-            }
-            if ($user->premium) {
-                $account_type = "Premium";
-            } else {
-                $account_type = "Standardowe";
-            }
-            $person = [
-                $user->name,
-                $user->surname,
-                $user->email,
-                $user->nickname,
-                $user->phone_number,
-                $user->person_number,
-                $birthdate,
-                $sex,
-                $account_type
+        <?php
+        $formsy = ["Imie", "Nazwisko", 'Email', 'Pseudonim', 'Numer telefonu', 'Pesel', 'Data urodzenia',
+            'Płeć', 'Rodzaj Konta'];
+        $pesel = $user->person_number;
+        if ($pesel[0] == 0) {
+            $year = '200' . $pesel[1];
+        } else {
+            $year = '19'. $pesel[0]. $pesel[1];
+        }
+        $month = $pesel[2].$pesel[3];
+        $day = $pesel[4].$pesel[5];
+        $birthdate = $day.'-'.$month.'-'.$year;
+        if (($pesel[7] % 2)== 0) {
+            $sex = 'Kobieta';
+        } else {
+            $sex = 'Mężczyzna';
+        }
+        if ($user->premium) {
+            $account_type = "Premium";
+        } else {
+            $account_type = "Standardowe";
+        }
+        $person = [
+            $user->name,
+            $user->surname,
+            $user->email,
+            $user->nickname,
+            $user->phone_number,
+            $user->person_number,
+            $birthdate,
+            $sex,
+            $account_type
         ];
-            $i = 0;
-            ?>
+        $i = 0;
+        ?>
         @foreach($formsy as $el)
             <div class="static"><p>{{$el}}</p></div>
             <div class="person"><p>{{$person[$i]}}</p></div>
-            <?php $i += 1; ?>
+                <?php $i += 1; ?>
         @endforeach
     </div>
 </div>

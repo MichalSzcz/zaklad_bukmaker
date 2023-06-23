@@ -67,7 +67,7 @@
         }
     </style>
 </head>
-<body class="antialiased" style="background: whitesmoke">
+<body class="antialiased" style="background: #1a202c">
 @include('partial.header')
 <div class="relative justify-center" style="justify-content: center; width:50%; margin: 180px auto auto;">
     <div id="OverDiv">

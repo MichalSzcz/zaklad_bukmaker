@@ -40,6 +40,7 @@ $s = str_repeat('0', count($matches));  ?>
     <style>
         body {
             font-family: 'Nunito', sans-serif;
+            background-color: #515958;
         }
     </style>
     <script>
@@ -70,7 +71,7 @@ $s = str_repeat('0', count($matches));  ?>
 
     </script>
 </head>
-<body class="antialiased" style="background: whitesmoke">
+<body class="antialiased" style="background: #1a202c">
 @include('partial.header')
 
 <div class="relative justify-center" style="justify-content: center; width:50%; margin: 200px auto auto;">
@@ -130,7 +131,7 @@ $notdraw = floor($notdraw*100)/100;
     @endforeach
     <br>
     @if ($i == 0)
-        <div style="text-align: center;">
+        <div style="text-align: center;color: yellow">
             <h4 style="font-size: 24px;">Niestety, w najbliższym czasie nie są rozgrywane żadne mecze.</h4>
         </div>
     @else

@@ -4,13 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>KGKM Bets</title>
+    <title>SBC</title>
 
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <style>
+        h1 {
+            color: yellow;
+        }
+
         /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
         html {
             line-height: 1.15;
@@ -421,7 +425,7 @@
         }
     </style>
 </head>
-<body class="antialiased" style="background: whitesmoke">
+<body class="antialiased" style="background: #1a202c">
 @include('partial.header')
 
 <div class="relative justify-center" style="justify-content: center; width:50%; margin: 200px auto auto;">

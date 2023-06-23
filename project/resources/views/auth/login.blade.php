@@ -1,41 +1,119 @@
+
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <style>
+        body {
+            background-color: #1a202c;
+            font-family: Arial, sans-serif;
+        }    .container {
+                 max-width: 400px;
+                 margin: 0 auto;
+                 padding: 40px;
+                 background-color: #2d3748;
+                 border-radius: 8px;
+                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+             }
 
-    <form method="POST" title="" action="{{ route('login') }}">
-        @csrf
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" style="color: #fde910"/>
-            <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')" autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        .form-label {
+            color: #fde910;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Hasło')" style="color: #fde910"/>
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            background-color: #1a202c;
+            color: #fde910;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
 
+        .form-input::placeholder {
+            color: #fde910;
+            opacity: 0.7;
+        }
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            autocomplete="current-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+        .form-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(#fde910, #ffc72c);
+            color: black;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
 
+        .form-button:hover {
+            background: linear-gradient(#ffc72c, #fde910);
+        }
 
+        .forgot-password {
+            margin-top: 20px;
+            text-align: left;
+        }
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Zapomniałeś hasła?') }}
-                </a>
-            @endif
+        .forgot-password a {
+            color: black;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-decoration: none;
+            background: linear-gradient(#fde910, #ffc72c);
+            padding: 8px 12px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
 
-            <x-primary-button class="ml-3">
-                {{ __('Zaloguj się') }}
-            </x-primary-button>
-        </div>
-    </form>
+        .forgot-password a:hover {
+            background: linear-gradient(#ffc72c, #fde910);
+        }
+    </style>
+
+    <div class="container">
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+
+        <form method="POST" title="" action="{{ route('login') }}">
+            @csrf
+
+            <!-- Email Address -->
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" class="form-input" type="text" name="email" :value="old('email')" placeholder="Your email" autofocus />
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password" class="form-label">Hasło</label>
+                <input id="password" class="form-input" type="password" name="password" placeholder="Your password" autocomplete="current-password" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+
+            </div>
+
+            <div class="form-group">
+                @if (Route::has('password.request'))
+                    <div class="forgot-password">
+                        <a href="{{ route('password.request') }}">Zapomniałeś hasła?</a>
+                    </div>
+                @endif
+            </div>
+
+            <div>
+                <button class="form-button">Zaloguj się</button>
+            </div>
+
+        </form>
+    </div>
 </x-guest-layout>
+
+
+

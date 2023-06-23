@@ -1,100 +1,163 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+    <style>
+        body {
+            background-color: #1a202c;
+            font-family: Arial, sans-serif;
+        }
 
-        <!-- Nickname -->
-        <div class="mt-4">
-            <x-input-label for="nickname" :value="__('Nazwa użytkownika')" style="color: #fde910" />
-            <x-text-input id="nickname" class="block mt-1 w-full" type="text" name="nickname" :value="old('nickname')" />
-            <x-input-error :messages="$errors->get('nickname')" class="mt-2" />
-        </div>
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #2d3748;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
 
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Imie')" style="color: #fde910"/>
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"  autofocus />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+        .form-label {
+            color: #fde910;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
 
-        <!-- Surname -->
-        <div>
-            <x-input-label for="surname" :value="__('Nazwisko')" style="color: #fde910"/>
-            <x-text-input id="surname" class="block mt-1 w-full" type="text" name="surname" :value="old('surname')"  autofocus />
-            <x-input-error :messages="$errors->get('surname')" class="mt-2" />
-        </div>
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            background-color: #1a202c;
+            color: #fde910;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" style="color: #fde910"/>
-            <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')"  />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        .form-input::placeholder {
+            color: #fde910;
+            opacity: 0.7;
+        }
 
+        .form-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(#fde910, #ffc72c);
+            color: black;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Hasło')" style="color: #fde910"/>
+        .form-button:hover {
+            background: linear-gradient(#ffc72c, #fde910);
+        }
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                          type="password"
-                          name="password"
-                           autocomplete="new-password" />
+        .forgot-password {
+            margin-top: 20px;
+            text-align: left;
+        }
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+        .forgot-password a {
+            color: black;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-decoration: none;
+            background: linear-gradient(#fde910, #ffc72c);
+            padding: 8px 12px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
 
-        <!-- Repeat Password -->
-        <div class="mt-4">
-            <x-input-label for="repeat_password" :value="__('Powtórz hasło')" style="color: #fde910"/>
+        .forgot-password a:hover {
+            background: linear-gradient(#ffc72c, #fde910);
+        }
+    </style>
 
-            <x-text-input id="repeat_password" class="block mt-1 w-full"
-                          type="password"
-                          name="repeat_password"  />
+    <div class="container">
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
 
-            <x-input-error :messages="$errors->get('repeat_password')" class="mt-2" />
-        </div>
+        <form method="POST" title="" action="{{ route('register') }}">
+            @csrf
 
-        <!-- Phone number -->
-        <div class="mt-4">
-            <x-input-label for="phone_number" :value="__('Numer telefonu')" style="color: #fde910" />
-            <x-text-input id="phone_number" class="block mt-1 w-full" type="text" name="phone_number" :value="old('phone_number')"  />
-            <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
-        </div>
-
-        <!-- Person number -->
-        <div class="mt-4">
-            <x-input-label for="person_number" :value="__('Pesel')" style="color: #fde910"/>
-            <x-text-input id="person_number" class="block mt-1 w-full" type="text" name="person_number" :value="old('person_number')"  />
-            <x-input-error :messages="$errors->get('person_number')" class="mt-2" />
-        </div>
-
-
-
-        <div>
-            <x-text-input id="terms" type="checkbox" name="terms" />
-            <a href="{{ url('/#rules') }}" style="color: red">Akceptuję Regulamin</a>
-            <x-input-error :messages="$errors->get('terms')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Kliknij tutaj jeśli masz już konto') }}
-            </a>
-
-            <div class="ml-4">
-                <x-primary-button style="display: inline-block;">
-                    {{ __('Załóż konto') }}
-                </x-primary-button>
+            <!-- Nickname -->
+            <div class="form-group">
+                <label for="nickname" class="form-label" style="color: #fde910">Nazwa użytkownika</label>
+                <input id="nickname" class="form-input" type="text" name="nickname" :value="old('nickname')" autofocus />
+                <x-input-error :messages="$errors->get('nickname')" class="mt-2" />
             </div>
-        </div>
 
+            <!-- Name -->
+            <div class="form-group">
+                <label for="name" class="form-label" style="color: #fde910">Imię</label>
+                <input id="name" class="form-input" type="text" name="name" :value="old('name')" autofocus />
+                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            </div>
 
+            <!-- Surname -->
+            <div class="form-group">
+                <label for="surname" class="form-label" style="color: #fde910">Nazwisko</label>
+                <input id="surname" class="form-input" type="text" name="surname" :value="old('surname')" autofocus />
+                <x-input-error :messages="$errors->get('surname')" class="mt-2" />
+            </div>
 
+            <!-- Email Address -->
+            <div class="form-group">
+                <label for="email" class="form-label" style="color: #fde910">Email</label>
+                <input id="email" class="form-input" type="text" name="email" :value="old('email')" />
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            </div>
 
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password" class="form-label" style="color: #fde910">Hasło</label>
+                <input id="password" class="form-input" type="password" name="password" autocomplete="new-password" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            </div>
 
+            <!-- Repeat Password -->
+            <div class="form-group">
+                <label for="repeat_password" class="form-label" style="color: #fde910">Powtórz hasło</label>
+                <input id="repeat_password" class="form-input" type="password" name="repeat_password" />
+                <x-input-error :messages="$errors->get('repeat_password')" class="mt-2" />
+            </div>
 
+            <!-- Phone number -->
+            <div class="form-group">
+                <label for="phone_number" class="form-label" style="color: #fde910">Numer telefonu</label>
+                <input id="phone_number" class="form-input" type="text" name="phone_number" :value="old('phone_number')" />
+                <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
+            </div>
 
+            <!-- Person number -->
+            <div class="form-group">
+                <label for="person_number" class="form-label" style="color: #fde910">Pesel</label>
+                <input id="person_number" class="form-input" type="text" name="person_number" :value="old('person_number')" />
+                <x-input-error :messages="$errors->get('person_number')" class="mt-2" />
+            </div>
 
-    </form>
+            <div class="form-group">
+                <input id="terms" class="form-checkbox" type="checkbox" name="terms" />
+                <label for="terms" style="color: red">Akceptuję Regulamin</label>
+                <x-input-error :messages="$errors->get('terms')" class="mt-2" />
+            </div>
+
+            <div>
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                    Masz już konto? Kliknij tutaj
+                </a>
+
+                <div class="ml-4">
+                    <button class="form-button" type="submit">
+                        Załóż konto
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 </x-guest-layout>
