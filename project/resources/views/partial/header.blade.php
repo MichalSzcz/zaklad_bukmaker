@@ -24,25 +24,29 @@
     .medium-letters {
         font-size: 20px;
     }
-    .small-letters {
-        font-size: 10px;
-    }
+
     .navbar {
         margin-left: auto;
         margin-right: auto;
         overflow: hidden;
         background-color: burlywood;
         position: fixed; /* Set the navbar to fixed position */
-        top: 0; /* Position the navbar at the top of the page */
-        width: 99%;
+        top: 10px; /* Position the navbar at the top of the page */
+        height: 220px;
+        width: 100%;
         z-index: 1;
     }
     #MainLogoImg {
         width: 90px;
+        display: inline-block;
+        vertical-align: middle;
+
     }
 
     #user_icon_image {
-        width: 90px;
+        width: 150px;
+        padding: -20px;
+
     }
 
     #DisciplineMenu {
@@ -66,7 +70,7 @@
 </style>
 <div id="DisciplineMenu">
     <a href="{{url('/bets/football')}}">Cycki</a>
-    <a href="{{url('/bets/volleyball')}}">Walenie Konia</a>
+    <a href="{{url('/bets/volleyball')}}">Konia</a>
     <a href="{{url('/bets/dart')}}">Dart</a>
     <a href="{{url('/bets/handball')}}">Piłka Ręczna</a>
     <a href="{{url('/bets/basketball')}}">Koszykówka</a>
@@ -78,7 +82,7 @@
             @auth
                 <a id="UserIconA" href="{{ url('/account') }}"><img id="user_icon_image" src="{{ asset('img/userIcon.png') }}" alt="user icon"></a>
                 <p class="text-sm text-gray-700 dark:text-gray-500 medium-letters">Stan konta: {{$user->deposit}}</p>
-                <p class="text-sm text-gray-700 dark:text-gray-500 medium-letters">Konto {{$user->premium == 1 ? __('Premium') : __('Standardowe')}}</p>
+
                 @if(isset($premium_expire))
                     <p class="text-sm text-gray-700 dark:text-gray-500 medium-letters">{{$premium_expire}}</p>
                 @endif
@@ -104,7 +108,7 @@
         </div>
     @endif
 
-    <div class="hidden fixed top-0 left-0 px-6 py-4 sm:block">
+    <div class="hidden fixed top-0 right-200 px-6 py-4 sm:block">
         <img id="MainLogoImg" src="{{asset('img/KGKMBets.svg')}} " alt="Logo">
     </div>
 

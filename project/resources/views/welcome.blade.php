@@ -33,7 +33,7 @@
             <div style="text-align: center">
                 <x-auth-session-status class="mb-4" :status="session('status')" />
                 <h3 style="text-align: left">SBC</h3>
-                <p style="text-align: justify">XD XD XD XD</p>
+                <p style="text-align: justify">XD XD XD <XD></XD></p>
                 <section id="us"></section>
             </div>
             <div style="text-align: justify">

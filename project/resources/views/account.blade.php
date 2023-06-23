@@ -59,7 +59,7 @@
         .links {
             text-align: left;
             width: 50%;
-            height: 200px;
+            height: 110px;
             float: left;
             border-top: 1px solid gray;
             border-right: 1px solid gray;
@@ -81,9 +81,8 @@
 <div class="relative justify-center" style="justify-content: center; width:80%; margin: 200px auto; display:grid; grid-template-columns: 20% 80%">
     <div class = 'links'>
         <a href="{{url("/account/add_balance")}}">Doładuj konto</a>
-    @if(!isset($premium_expire))
-        <a href="{{url("/account/premium")}}">Kup konto premium</a>
-    @endif
+
+
         <a href="{{url("/account/history")}}">Historia kuponów</a>
         <a href="{{url("/account/delete")}}">Usuń konto</a>
     </div>
