@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <p>Wprowadź kod potwierdzający, który został wysłany na twojego maila.</p>
+    <p>Wprowadź kod, który wysłaliśmy na twojego maila.</p>
     <form method="POST" action="{{ route('confirm.check') }}">
         @csrf
         <!-- User_id -->

@@ -8,7 +8,7 @@
             </div>
         @elseif(isset(($request->session()->get('_old_input'))['email']))
             <div>
-                <p>Kod zmiany hasła został wysłany na email: {{($request->session()->get('_old_input'))['email']}}</p>
+                <p>Kod zmiany hasła został wysłany na twojego emaila: {{($request->session()->get('_old_input'))['email']}}</p>
             </div>
         @endif
         <!-- Password Reset Token -->

@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
-        {{ __('Zapomniałeś hasła? Żaden problem. Podaj nam swój adres email, na który wyślemy Ci link do zmiany hasła na nowe.') }}
+        {{ __('Nie pamiętasz hasła? Nie ma problemu. Podaj nam swój adres email, a wyślemy Ci link do zmiany hasła na nowe.') }}
     </div>
 
     <!-- Session Status -->
