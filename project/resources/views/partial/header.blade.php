@@ -32,7 +32,7 @@
         background-color: burlywood;
         position: fixed; /* Set the navbar to fixed position */
         top: 10px; /* Position the navbar at the top of the page */
-        height: 220px;
+        height: 170px;
         width: 100%;
         z-index: 1;
     }

@@ -77,15 +77,24 @@
             <x-input-error :messages="$errors->get('terms')" class="mt-2" />
         </div>
 
-
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}"style="margin-right: -40px;">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Kliknij tutaj jeśli masz już konto') }}
             </a>
 
-            <x-primary-button class="ml-4">
-                {{ __('Załóż konto') }}
-            </x-primary-button>
+            <div class="ml-4">
+                <x-primary-button style="display: inline-block;">
+                    {{ __('Załóż konto') }}
+                </x-primary-button>
+            </div>
         </div>
+
+
+
+
+
+
+
+
     </form>
 </x-guest-layout>
