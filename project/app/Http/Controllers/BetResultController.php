@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Bet;
 use App\Models\BetEvent;
 use App\Models\Event;
@@ -20,9 +23,11 @@ class BetResultController
          * jesli wszystkie eventy są skończone i wygrane to wtedy dajemy kupon jako wygrany i od razu robimy update
          * ddepozytu += winprice
          */
-        $bets = Bet::where('status', 0)->get();
+        $bets = DB::table('bets')->where('status', '=', 0)->get();
+        $bets = json_decode(json_encode($bets), true);
+        $user=Auth::user();
         foreach ($bets as $bet) {
-            $b_events = BetEvent::where('bet_id', $bet->id)->get();
+            $b_events = DB::table('bet_events')->where('bet_id', $bet['id'])->get();
             $bet_win = true;
             $not_ended = 0;
             //bierzemy każdy bet_event dla beta i sprawdzamy czy wszystkie są skończone oraz czy są trafione
@@ -33,18 +38,15 @@ class BetResultController
                     //jesli nasz typ się zgadza z oczekiwaniami to wygrany
                     if ($special_event instanceof SpecialEvent) {
                         if ($b_ev->answer == $special_event->correct) {
-                            $bet->update(['status' => 1, 'bet_result' => 2, 'win_price' => floor($bet->stake * $bet->total_odd * 85) / 100]);
-                            $user = User::where('id', $bet->user_id)->first();
-                            if ($user instanceof  User) {
-                                User::where('id', $bet->user_id)->update(['deposit' => floor($user->deposit + $bet->stake * $bet->total_odd * 85) / 100]);
-                            }
+                            DB::table('bets')->where('status', '=', 0)->update(['status' => 1, 'bet_result' => 2, 'win_price' => floor($bet->stake * $bet->total_odd * 85)/100]);
+                            DB::table('league_members')->update(['points' => $user->deposit + floor($bet->stake * $bet->total_odd * 85) / 100]);
                         } else {
                             $bet->update(['status' => true, 'bet_result' => 0, 'win_price' => 0]);
                         }
                     }
                 } else {
                     //tu zwykły event
-                    $event = Event::where('id', $b_ev->event_id)->first();
+                    $event = DB::table('events')->where('id', $b_ev->event_id)->first();
                     if ($event instanceof Event) {
                         if ($event->status == 'ended') {
                             //spr czy typ jest trafiony
@@ -63,11 +65,9 @@ class BetResultController
             if (!$not_ended) {
                 //jesli wygrany to zmieniamy status na 2, ustawiamy win price i dodajemy do depozytu
                 if ($bet_win) {
-                    $bet->update(['status' => 1, 'bet_result' => 2, 'win_price' => floor($bet->stake * $bet->total_odd * 85)/100]);
-                    $user = User::where('id', $bet->user_id)->first();
-                    if ($user instanceof User) {
-                        User::where('id', $bet->user_id)->update(['deposit' => $user->deposit + floor($bet->stake * $bet->total_odd * 85) / 100]);
-                    }
+                    DB::table('bets')->where('status', '=', 0)->update(['status' => 1, 'bet_result' => 2, 'win_price' => floor($bet['stake'] * $bet['total_odd'] * 85)/100]);
+                    DB::table('league_members')->where('user_id','=',$user['id'])->update(['points' => $user['deposit'] + floor($bet['stake'] * $bet['total_odd'] * 85) / 100]);
+                    DB::table('users')->where('id','=',$user['id'])->update(['deposit' => $user['deposit'] + floor($bet['stake'] * $bet['total_odd'] * 85) / 100]);
                 } else {
                     $bet->update(['status' => 1, 'bet_result' => 0]);
                 }
@@ -85,9 +85,6 @@ class BetResultController
             if ($now != false) {
                 $now = $now->modify("+1 hour");
                 //trzeba zupdateować event do live
-                if ($now > $startdate) {
-                    $ev->update(['status' => 'live']);
-                }
             }
         }
 
@@ -104,9 +101,6 @@ class BetResultController
                 $now = $now->modify("+1 hour");
             }
             //trzeba zupdateować event do ended
-            if ($now > $enddate) {
-                $li->update(['status' => 'ended']);
-            }
         }
 //            dd(DateTime::createFromFormat('Y-m-d h:i:s', $date) == $now);
 //            dd(date($date));

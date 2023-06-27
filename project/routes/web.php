@@ -10,7 +10,7 @@ use App\Http\Controllers\BetResultController;
 use App\Http\Controllers\BetsController;
 use App\Http\Controllers\LiveBetsController;
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\LeagueController;
 use App\Http\Controllers\Auth\RegisterConfirmController;
 use App\Http\Controllers\ScratchController;
 use App\Http\Controllers\SpecialBetsController;
@@ -83,7 +83,7 @@ Route::get('/bets/{disc?}', function (string $disc = null) {
         view('bets')->with('matches', $matches)->with('odds', $oddsList);
 });
 
-Route::get('/specialoffers', function () {
+Route::get('/leagues', function () {
     $matches = SpecialEvent::all();
     $oddsList = [];
     foreach ($matches as $match) {
@@ -91,9 +91,9 @@ Route::get('/specialoffers', function () {
     }
     $user = Auth::user();
     if ($user) {
-        return view('specialoffers')->with('matches', $matches)->with('odds', $oddsList)->with('user', $user);
+        return view('leagues')->with('matches', $matches)->with('odds', $oddsList)->with('user', $user);
     }
-    return view('specialoffers')->with('matches', $matches)->with('odds', $oddsList);
+    return view('leagues')->with('matches', $matches)->with('odds', $oddsList);
 });
 
 Route::get('/results', function () {
@@ -198,7 +198,10 @@ Route::get('/account/history', [AccountHistoryController::class, 'index'])
     ->name('account.history');
 
 Route::post('/bets', [BetsController::class, 'store'])->name('bets.bet');
-Route::post('/specialoffers', [SpecialBetsController::class, 'store'])->name('specialoffers.bet');
+Route::post('/leagues', [SpecialBetsController::class, 'store'])->name('leagues.bet');
+Route::get('/league', [ScratchController::class, 'index'])->middleware(['auth', 'verified'])
+    ->name('league');
+Route::post('/league', [LeagueController::class, 'store'])->name('league.bet');
 
 
 Route::get('/betcode', function () {

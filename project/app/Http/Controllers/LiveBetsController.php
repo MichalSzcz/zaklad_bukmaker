@@ -51,9 +51,6 @@ class LiveBetsController extends Controller
                 $sum += intval($option);
             }
         }
-        if ($sum == 0) {
-            return back()->withErrors(["empty" => "Nie możesz obstawić pustego kuponu."]);
-        }
         if ($request["amount"] <= 0) {
             return back()->withErrors(["amount" => "Podaj kwotę kuponu."]);
         }

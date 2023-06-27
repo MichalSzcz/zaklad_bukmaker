@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class ScratchController extends Controller
@@ -14,60 +15,28 @@ class ScratchController extends Controller
     public function index(): RedirectResponse|View
     {
         $user = Auth::user();
-        if ($user) {
-            if (!$user->premium) {
-                return redirect('/account/premium');
-            }
-            $premium = Premium::where('user_id', $user->id)->first();
-
-            $didWin = 1;
-            if ($premium) {
-                if ($premium->scratches_left == 0) {
-                    $didWin = 0;
-                    if ($this->didTheyWin($premium->scratchcard_id)) {
-                        $didWin = 2;
-                    }
-                }
-            }
-
-            return view('scratchcard')->with('user', $user)->with('premium', $premium)->with('didWin', $didWin);
-        } else {
-            return back();
-        }
+        return view('scratchcard');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request): RedirectResponse | View
     {
         $lastID = -1;
         $user = Auth::user();
-        if ($user && isset($request["id"])) {
-            $premium = Premium::where('user_id', $user->id)->first();
-            if ($premium) {
-                $new_s_cnt = ($premium->scratches_left) - 1;
-                if ($new_s_cnt < 0) {
-                    return back()->withErrors(['enough' => 'Na dziś wystraczy. Wróć jutro!']);
-                }
-                $char = substr($premium->scratchcard_id, $request["id"]-1, 1);
-                $char = strval(intval($char) + 5);
-                $new_s_id = substr_replace($premium->scratchcard_id, $char, $request["id"]-1, 1);
-                $up_1 = Premium::where('id', $premium->id)->first();
-                if ($up_1) {
-                    $up_1->update(['scratches_left' => $new_s_cnt]);
-                }
-                $up_2 = Premium::where('id', $premium->id)->first();
-                if ($up_2) {
-                    $up_2->update(['scratchcard_id' => $new_s_id]);
-                }
-                $lastID = $request["id"];
-                if ($new_s_cnt == 0 and $this->didTheyWin($new_s_id)) {
-                    $up_3 = User::where('id', $user->id)->first();
-                    if ($up_3) {
-                        $up_3->update(['deposit' => $user->deposit + 5]);
-                    }
-                }
+        $check = DB::table('users')->where('nickname', 'LIKE', $request->name)->first();
+        $users=DB::table('users')->join('league_members', 'users.id', '=', 'league_members.user_id')->get();
+        foreach ($users as $us) {
+            $us=json_decode(json_encode($us), true);
+            $w=DB::table('users')->join('league_members', 'users.id', '=', 'league_members.user_id')->where('nickname', 'like', $request->name)->get();
+            if ($check == null) {
+                return redirect('scratchcard')->with('status', "zly");
+            } else {
+                DB::table('league_members')->insert(['user_id' => $check->id,
+                    'league_id' => $us['league_id'],
+                    'league_name' => $us['league_name'],
+                'points' => 0]);
             }
         }
-        return redirect('scratchcard');
+        return redirect('leagues');
     }
 
     private function didTheyWin(String $sid): bool

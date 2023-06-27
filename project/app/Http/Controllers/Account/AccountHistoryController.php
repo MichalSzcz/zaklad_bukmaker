@@ -17,11 +17,11 @@ class AccountHistoryController
     {
         $user = Auth::user();
         if ($user) {
-            $bets = Bet::where('user_id', $user->id)->get();
+            $bets = Bet::where('user_id', $user['id'])->get();
             if ($bets->count()) {
                 $bet_events = [];
                 foreach ($bets as $bet) {
-                    $events = BetEvent::where('bet_id', $bet->id)->get();
+                    $events = BetEvent::where('bet_id', $bet['id'])->get();
                     if ($events->count()) {
                         $extended_events = array();
                         foreach ($events as $event) {

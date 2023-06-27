@@ -1,4 +1,8 @@
 <?php
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
+$matches = DB::table('events')->get();
 $s = str_repeat('0', count($matches));  ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -17,30 +21,63 @@ $s = str_repeat('0', count($matches));  ?>
         .abutton {
             padding: 10px;
             border-radius: 5px;
-            background-color: lightgray;
+
+            border: 1px solid #F0E68C;
+            padding: 5px;
+            color:#F0E68C;
+
+
         }
         .abutton:hover {
             background-color: gray;
+
+
         }
         .bet-button-div {
             display: grid;
             grid-template-columns: 40% 20% 40%;
             column-gap: 3px;
             row-gap: 3px;
+
         }
+
         span {
             float: right;
-            color: blue;
+            color: #F0E68C;
+
         }
         .clicked {
             background-color: #4CAF50;
+            border: 1px solid #ccc;
+            padding: 5px;
         }
-    </style>
+        .relative {
 
-    <style>
+            padding: 40px;
+            background-color: #2d3748;
+            border-radius: 8px;
+
+        }
+
         body {
+
             font-family: 'Nunito', sans-serif;
-            background-color: #515958;
+            background: #1a202c;
+            color: #1B1E21;
+
+        }
+        h3,h4, p,a{
+            color:#F0E68C;
+        }
+       h3{
+            fotn-size:20px;
+            border-top-color: #F0E68C;
+            border-top: solid 1px;
+           border-bottom-color:#F0E68C;
+           border-bottom:solid 1px;
+        }
+
+        a{
         }
     </style>
     <script>
@@ -71,13 +108,16 @@ $s = str_repeat('0', count($matches));  ?>
 
     </script>
 </head>
-<body class="antialiased" style="background: #1a202c">
+<body>
 @include('partial.header')
 
-<div class="relative justify-center" style="justify-content: center; width:50%; margin: 200px auto auto;">
+<div class="relative justify-center" style="justify-content: center; width:50%; margin: 300px auto auto;">
     <?php $i = 0;?>
+    <?php $matches = DB::table('events')->where('status','like','upcoming')->get()?>
+
     @foreach($matches as $match)
         <?php $match = json_decode(json_encode($match), true);?>
+            <?php $odds = DB::table('odds')->where('event_id','=',$match['id'])->get();?>
         <?php $odd = json_decode(json_encode($odds[$i]), true);?>
         <?php
             $draw = 1/$odd["win_op_1"] + 1/$odd["win_op_2"];
@@ -110,7 +150,7 @@ $notdraw = 1/$notdraw;
 $notdraw = floor($notdraw*100)/100;
 ?>
 
-
+        *\
         <div id="match{{$i}}">
             <h3 style="text-align: left">{{$match["date"]}} {{substr($match["time"], 0, 5)}} {{$match["timezone"]}}</h3>
             <h4 style="text-align: left">{{$match["discipline"]}}</h4>
@@ -131,33 +171,38 @@ $notdraw = floor($notdraw*100)/100;
     @endforeach
     <br>
     @if ($i == 0)
-        <div style="text-align: center;color: yellow">
+        <div style="text-align: center;">
             <h4 style="font-size: 24px;">Niestety, w najbliższym czasie nie są rozgrywane żadne mecze.</h4>
         </div>
-    @else
-    <div style="text-align: center;">
-        <form method="POST" action="{{route("bets.bet")}}">
-            @csrf
-            <div>
-                <x-input-label  class='in' id="amount" for="amount" :value="__('Stawka')" />
-                <x-text-input id="amount" class="block mt-1 w-full" type="text" name="amount" min="0" />
-                <div style="margin: auto">
-                    <x-input-error :messages="$errors->get('amount')" class="mt-2" />
-                    <x-input-error :messages="$errors->get('empty')" class="mt-2" />
-                </div>
-            </div>
-            <div>
-                <x-input-label  class='in' id="bet_code" for="bet_code" :value="__('Kod zakładu')" />
-                <x-text-input id="bet_code_i" class="block mt-1 w-full" type="text" name="bet_code" value="{{$s}}"/>
-                <x-input-error :messages="$errors->get('bet_code')" class="mt-2" />
-            </div>
-            <x-primary-button>
-                {{ __('Postaw kupon') }}
-            </x-primary-button>
 
-            <br><br>
-        </form>
-    </div>
+
+    @else
+        <div style="text-align: center;">
+            <form method="POST" action="{{ route("bets.bet") }}">
+                @csrf
+                <div class="relative">
+                    <x-input-label class='in' id="amount" for="amount" :value="__('Stawka')" style="color: #F0E68C;"/>
+                    <x-text-input id="amount" class="block mt-1 w-full" type="text" name="amount" min="0" style="background: #F0E68C; color: black;" />
+                    <div style="margin: auto">
+                        <x-input-error :messages="$errors->get('amount')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('empty')" class="mt-2" />
+                    </div>
+                </div>
+                <div>
+                    <x-input-label class='in' id="bet_code" for="bet_code" :value="__('Kod zakładu')" style="color: #F0E68C;"/>
+                    <x-text-input id="bet_code_i" class="block mt-1 w-full" type="text" name="bet_code" value="{{ $s }}" style="background: #F0E68C; color: black;" />
+                    <x-input-error :messages="$errors->get('bet_code')" class="mt-2" />
+                </div>
+
+                <x-primary-button style="background:  linear-gradient(#fde910, #ffc72c); color: black;">
+                    {{ __('Postaw kupon') }}
+                </x-primary-button>
+
+                <br><br>
+            </form>
+        </div>
+
+
     @endif
 </div>
 

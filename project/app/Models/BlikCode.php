@@ -4,21 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-/**
 
- * @mixin /Eloquent
-
- */
-class Odds extends Model
+class BlikCode extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'event_id', 'win_op_1', 'win_op_2',  'sum', 'is_special'
+        'code'
     ];
-    protected $table = 'odds';
+    protected $table = 'blik_codes';
 
     public function key(): string
     {
-        return 'model_odds_'.$this->id;
+        return 'model_blik_code'.$this->id;
     }
 }

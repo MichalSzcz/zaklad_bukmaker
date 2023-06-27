@@ -57,6 +57,7 @@
 
         button:hover {
             background-color: #45a049;
+            color: #1a202c;
         }
         img {
             height: 200px;
@@ -64,35 +65,71 @@
             display: block;
         }
 
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            font-size: 1.2rem;
+            color: #F0E68C;
+        }
+        .links a:hover {
+            background-color: #555;
+        }
+
+        .links a.active {
+            background-color: #777;
+            color: #fff;
+        }
+
+
+
+
+        .form-group .block {
+            margin-top: 0.5rem;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            border: none;
+            background-color: lightgray;
+        }
+
+        .form-group .block:focus {
+            outline: none;
+            background-color: gray;
+        }
+
+
+
     </style>
 </head>
-
 <body>
 <a href="{{ url('/account') }}"><img id="user_icon_image" src="{{ asset('img/userIcon.png') }}" alt="user icon"></a>
 <div>
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-    <h1 style="color: #fde910; font-size: 2rem; text-align: center;">Doładuj konto Śmieciu</h1>
-    <img src="{{asset('img/blik.png')}}" style="margin-bottom: 20px;">
-    <form method = "post" action="{{route('account.balance')}}">
-        @csrf
-        <div class="tex">
-            <label id="amount" for="amount" style="color: gold;">Kwota</label>
-            <input id="amount" type="text" name="amount" min="0" max="1000" autofocus placeholder="Wprowadź kwotę" />
-            <x-input-error :messages="$errors->get('amount')" class="mt-2" />
-        </div>
-        <div class="tex">
-            <label id="blikCode" for="blikCode" style="color: gold;">Kod Blik</label>
-            <input id="blikCode"  type="text" style="color: gold;" name="blikCode" autofocus placeholder="Wprowadź kod Blik" />
-            <x-input-error :messages="$errors->get('blikCode')" class="mt-2" />
-        </div>
+    <x-auth-session-status class="mb-4" :status="session('status')" style="color: #F0E68C;text-align: center"  />
+    <h1 style="color: #F0E68C; font-size: 2rem; text-align: center;">Doładuj konto </h1>
+    <img src="{{asset('img/logo.png')}}" style="margin-bottom: 20px;">
+    <div class="form-group">
 
-        <div>
-            <button>
-                Potwierdź
-            </button>
-        </div>
-    </form>
+        <form method="post" action="{{route('account.balance')}}">
+            @csrf
+            <div class="tex">
+                <label id="amount" for="amount" style="color: #F0E68C;">Punkty</label>
+                <input id="amount" type="text" name="amount" min="0" max="1000" autofocus placeholder="Wprowadź ilość punktów" style="background-color: transparent;" />
+                <x-input-error :messages="$errors->get('amount')" class="mt-2" />
+            </div>
+
+
+
+            <div>
+                <button class="button">
+                    Potwierdź
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
+
 </html>

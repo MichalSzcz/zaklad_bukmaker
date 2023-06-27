@@ -22,25 +22,47 @@
             width: 10%;
             margin-right: 10px;
         }
-        
+
 
         .ads_img {
             width: 100px;
         }
         .section{
-            color: yellow;
+            color: #F0E68C;
         }
+        li{
+            color:#F0E68C;
+            font-size: 13px;
+        }
+        .ads_img{
+            text-align: left;
+            width:200px;
+            height:200px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            justify-items: center;
+            grid-gap: 10px;
+            width:50%;
+            margin: 200px auto auto;
+        }
+
+         h1 {
+             margin: 250px auto auto;
+         }
+
 
     </style>
 </head>
 <body>
 @include("partial.header")
-<div class="relative justify-center" style="justify-content: center; width:50%; margin: 200px auto auto;">
-    <div style="text-align: center;">
+<div class="relative justify-center" style="text-align: justify; width:50%; margin: 250px auto auto;">
+    <div style="text-align: justify;">
         <h3 style="text-align: left; font-size: 15px; font-weight: bold; color: yellow;"></h3>
-        <section id="us"></section>
-
-        <h1 style="color: yellow;">Witamy na stronie bukmacherskiej (nazwa strony)</h1>
+        <section id="O_nas"></section>
+        <h1>  </h1>
+        <h1 style="color: #F0E68C;text-align: center;">Witamy w Sport Bet Chellenge</h1>
 
         <div class="section">
             <h2>Odkryj pasję zakładów sportowych i dołącz do naszej społeczności graczy, którzy czerpią radość z emocji sportowych wydarzeń i szansy na wygraną.</h2>
@@ -68,31 +90,59 @@
     </div>
 
 </div>
+<section id="kontakt"></section>
 
-<div style="text-align: center; color: yellow;">
-    <h3 style="text-align: center; color: yellow;">Regulamin</h3>
-    <p style="margin-left: 20px; text-align: justify;">Udział w grze jest dozwolony jedynie po zaakceptowaniu poniższych zasad:</p>
+<div style="text-align: justify; width:50%; margin: 200px auto auto;">
+    <h3 style="text-align: center; color: #F0E68C;">KONTAKT</h3>
+    <p style=" text-align: justify; color:#F0E68C; font-size: 13px;"></p>
     <ol style="text-align: left;">
-        <li>a) "SportBetChallenge" - platforma internetowa dostępna pod adresem [adres strony], świadcząca usługi związane z obstawianiem meczów sportowych.</li>
-        <li>"Użytkownik" - osoba korzystająca z usług SportBetChallenge poprzez założenie konta i/lub logowanie się na stronie.</li>
-        <li>"Liga" - grupa użytkowników tworzona na SportBetChallenge w celu rywalizacji w obstawianiu meczów.</li>
-        <li>Podmiotem prawnym KGKM Bets jest KGKM</li>
-        <li>"Punkty" - wirtualna waluta przyznawana użytkownikom w zależności od ich aktywności i wyników w obstawianiu meczów.</li>
-        <li>"Mecz" - wydarzenie sportowe, na które użytkownicy mogą typować wynik.</li>
-    </ol>
-    <section id="rules"></section>
 
-    @auth
-        @if(!$user->premium)
-            <div id="ads_1"><img class="ads_img" src="{{ asset('img/ads/A'.mt_rand(1, 10).'.png') }}" alt="Ads icon"></div>
-            <div id="ads_2"><img class="ads_img" src="{{ asset('img/ads/A'.mt_rand(1, 10).'.png') }}" alt="Ads icon"></div>
-        @endif
-    @else
-        <div class="ads_1"><img class="ads_img" src="{{ asset('img/ads/A'.mt_rand(1, 10).'.png') }}" alt="Ads icon"></div>
-        <div class="ads_2"><img class="ads_img" src="{{ asset('img/ads/A'.mt_rand(1, 10).'.png') }}" alt="Ads icon"></div>
-        <div class="ads_3"><img class="ads_img" src="{{ asset('img/ads/A'.mt_rand(1, 10).'.png') }}" alt="Ads icon"></div>
-    @endauth
+        <ul>
+            <li style="font-size: 20px;">Adres siedziby: ulica 3-Maja 69, Kraków, 30-243</li>
+            <li style="font-size: 20px;">Adres siedziby: ulica Franciszkańska 96, Jasło, 38-200</li>
+            <li style="font-size: 20px;">Telefon: +48 512987361</li>
+            <li style="font-size: 20px;">Email: małyptaszek@gmail.pl</li>
+            <li style="font-size: 20px;">Strona internetowa: www.SBC.pl</li>
+            <li style="font-size: 20px;">Nasi specjaliści są gotowi odpowiedzieć na Twoje pytania i zapewnić Ci doskonałą obsługę.</li>
+        </ul>
+
+
+        </ul>
+        </div>
+
+    </ol>
 </div>
+<div class="grid-container">
+@auth
+    @if(!$user->premium)
+        <div id="ads_1"><img class="ads_img" src="{{ asset('img/ads/A'.mt_rand(1, 10).'.png') }}" alt="Ads icon"></div>
+        <div id="ads_2"><img class="ads_img" src="{{ asset('img/ads/A'.mt_rand(1, 10).'.png') }}" alt="Ads icon"></div>
+            <div id="ads_2"><img class="ads_img" src="{{ asset('img/ads/A'.mt_rand(1, 10).'.png') }}" alt="Ads icon"></div>
+            <div id="ads_2"><img class="ads_img" src="{{ asset('img/ads/A'.mt_rand(1, 10).'.png') }}" alt="Ads icon"></div>
+
+        @endif
+@else
+    <div class="ads_1"><img class="ads_img" src="{{ asset('img/ads/A'.mt_rand(1, 10).'.png') }}" alt="Ads icon"></div>
+    <div class="ads_2"><img class="ads_img" src="{{ asset('img/ads/A'.mt_rand(1, 10).'.png') }}" alt="Ads icon"></div>
+    <div class="ads_3"><img class="ads_img" src="{{ asset('img/ads/A'.mt_rand(1, 10).'.png') }}" alt="Ads icon"></div>
+@endauth
+</div>
+<div style="text-align: justify; width:50%; margin: 200px auto auto;">
+    <h3 style="text-align: center; color: #F0E68C;">Regulamin</h3>
+    <p style=" text-align: justify; color:#F0E68C; font-size: 14px;">Udział w grze jest dozwolony jedynie po zaakceptowaniu poniższych zasad:</p>
+    <ol style="text-align: left;">
+        <li style="font-size: 14px;">a) "SportBetChallenge" - platforma internetowa dostępna pod adresem [adres strony], świadcząca usługi związane z obstawianiem meczów sportowych.</li>
+        <li style="font-size: 14px;">"Użytkownik" - osoba korzystająca z usług SportBetChallenge poprzez założenie konta i/lub logowanie się na stronie.</li>
+        <li style="font-size: 14px;">"leagues" - grupa użytkowników tworzona na SportBetChallenge w celu rywalizacji w obstawianiu meczów.</li>
+        <li style="font-size: 14px;">Podmiotem prawnym SportBetChallenge jest SBC sp.z.o.o.</li>
+        <li style="font-size: 14px;">"Punkty" - wirtualna waluta przyznawana użytkownikom w zależności od ich aktywności i wyników w obstawianiu meczów.</li>
+        <li style="font-size: 14px;">"Mecz" - wydarzenie sportowe, na które użytkownicy mogą typować wynik.</li>
+    </ol>
+
+    <section id="Regulamin"></section>
+</div>
+
+
 
 </body>
 </html>

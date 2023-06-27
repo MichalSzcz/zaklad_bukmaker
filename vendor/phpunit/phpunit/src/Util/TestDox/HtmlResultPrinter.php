@@ -29,7 +29,7 @@ final class HtmlResultPrinter extends ResultPrinter
         <style>
             body {
                 text-rendering: optimizeLegibility;
-                font-variant-ligatures: common-ligatures;
+                font-variant-leaguestures: common-leaguestures;
                 font-kerning: normal;
                 margin-left: 2em;
                 background-color: #ffffff;

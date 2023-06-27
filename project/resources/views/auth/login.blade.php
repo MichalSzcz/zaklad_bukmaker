@@ -18,7 +18,7 @@
         }
 
         .form-label {
-            color: #fde910;
+            color: #F0E68C;
             font-weight: bold;
             font-size: 1.2rem;
         }
@@ -27,14 +27,14 @@
             width: 100%;
             padding: 10px;
             background-color: #1a202c;
-            color: #fde910;
+            color: #F0E68C;
             border: none;
             border-radius: 4px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
 
         .form-input::placeholder {
-            color: #fde910;
+            color: #F0E68C;
             opacity: 0.7;
         }
 

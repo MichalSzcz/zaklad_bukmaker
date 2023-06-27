@@ -22,7 +22,7 @@ class EventsSeeder extends Seeder
                 'discipline' => $faker->randomElement(['Piłka Nożna', 'Siatkówka', 'Piłka Ręczna', 'Dart', 'Koszykówka', 'E-sport']),
                 'time' => $faker->time('H:i'),
                 'timezone' => $faker->timezone,
-                'league' => $faker->randomElement(['LaLiga', 'Ekstraklasa', 'Bundesliga', 'Piotrkowska Klasa Okręgowa', 'BPL', 'Lique 1']),
+                'league' => $faker->randomElement(['Laleagues', 'Ekstraklasa', 'Bundesleagues', 'Piotrkowska Klasa Okręgowa', 'BPL', 'Lique 1']),
                 'round' => $faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'Semi-Final', 'Final', '1/8 Final']),
                 'status' => $faker->randomElement(['upcoming', 'ended', 'live']),
                 'score' => $faker->numberBetween(0, 10) . ':' . $faker->numberBetween(0, 10)
